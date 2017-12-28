@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+
+    
+<mapper namespace="com.mapper.UserInfoMapper">  
+
+     <select id="selCount" parameterType="UserInfo" resultType="Integer">
+     	select count(*) num from userInfo where userId=#{userId} and userPwd=#{userPwd} 
+     </select>
+     
+     <select id="selALL" parameterType="UserInfo" resultType="UserInfo">
+    	 select userId,userPwd,userName,authority,registerDate from userInfo
+     </select>
+     
+     <select id="add" parameterType="UserInfo">
+     	insert into userInfo(userId,userPwd,userName,authority,registerDate)
+     	values(#{userId},#{userPwd},#{userName},#{authority},NOW())
+     </select>
+     
+      <select id="update" parameterType="UserInfo">
+     	update userInfo set userPwd=#{userPwd},userName=#{userName},authority=#{authority} 
+     	where userId=#{userId} 
+     </select>
+     
+      <select id="del" parameterType="String">
+     	delete from userInfo where userId=#{userId}
+     </select>
+     
+      <select id="selOne" parameterType="String" resultType="UserInfo">
+      select userId,userPwd,userName,authority,registerDate from userInfo where userId=#{userId}
+     </select> 
+     
+     <select id="modifyPw" parameterType="UserInfo" >
+      update userInfo set userPwd=#{userPwd} where userId=#{userId} 
+     </select> 
+  	  <select id="getOne" parameterType="String" resultType="Integer">
+     	select count(*)  from userInfo where userId=#{userId} 
+     </select>
+     <select id="checkPwd" parameterType="UserInfo" resultType="Integer">
+     	select count(*)  from userInfo where userId=#{0} and userPwd=#{1}
+     </select>
+</mapper>

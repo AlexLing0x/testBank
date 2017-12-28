@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.mapper.PaperMapper">
+
+	<resultMap id="result-paper-map" type="Paper">
+	  <id property="tpid" column="tpid" />
+		<result property="tpNo" column="tpNo" />
+		<result property="tpName" column="tpName" />
+		<result property="content" column="content" />
+		<result property="generateDate" column="generateDate" />
+		<result property="description" column="description" />
+		
+	<association property="test" column="tid" javaType="Test">
+	   <result property="sid" column="sid" />
+		<result property="type" column="type" />
+		<result property="title" column="title" />
+		<result property="factor" column="factor" />
+		<result property="score" column="score" />
+		<result property="photo" column="photo" />
+		<result property="answer" column="answer" />
+		<result property="expl" column="expl" />
+	</association> 
+		
+		
+		<!-- <association property="point" column="kpid" javaType="Point">
+			<result property="kpid" column="kpid" />
+			<result property="pointNo" column="pointNo" />
+			<result property="pointName" column="pointName" />
+		</association> 
+		-->
+		<association property="section" column="sid" javaType="Section">
+			<result property="sid" column="sid" />
+			<result property="sectionNo" column="sectionNo" />
+			<result property="sectionName" column="sectionName" />
+		</association>
+		
+		<association property="chapter" column="cid" javaType="Chapter">
+			<result property="cid" column="cid" />
+			<result property="chapterNo" column="chapterNo" />
+			<result property="chapterName" column="chapterName" />
+		</association>
+		
+	</resultMap>
+
+
+
+	<select id="selCount" parameterType="Map" resultType="Integer">
+		select count(*) num from testpaper tp
+	<!-- 	inner join section s on t.sid=s.sid -->
+		<where>
+			<if test="tpName!=null and tpName!=''">and tp.tpName like CONCAT('%',#{tpName},'%')</if>
+		</where>
+	</select>
+	 <select id="selList" parameterType="Map" resultMap="result-paper-map">
+		select  tp.*
+		from testpaper tp
+		<where>
+			<if test="tpName!=null and tpName!=''">and tp.tpName like CONCAT('%',#{tpName},'%')</if>
+		</where>
+	</select>
+
+
+	<select id="autoGene" parameterType="Paper">
+		insert into testpaper
+		(tpNo,tpName,content,generateDate,description)
+		values(#{tpNo},#{tpName},#{content},NOW(),#{description})
+	</select>
+
+
+
+     <select id="del" parameterType="Integer">
+		delete from testPaper where
+		tpid=#{tpid}
+	</select> 
+
+
+  <select id="getPaper" parameterType="Integer" resultType="Paper">
+		select  tp.*
+		from testpaper tp
+		where tpid=#{tpid}
+		
+	</select>
+
+ <!-- 
+	<select id="selOne" parameterType="Integer" resultMap="result-test-map">
+		select  t.*,s.sectionNo,s.sectionName,s.cid,c.chapterNo,c.chapterName
+		from testinfo t
+		inner join section s on t.sid=s.sid
+		inner join chapter c on c.cid=s.cid
+		where tid=#{tid}
+	</select>
+
+
+	<select id="updateTest" parameterType="Test">
+		update testInfo set
+		sid=#{sid},type=#{type},title=#{title},factor=#{factor},score=#{score},photo=#{photo},answer=#{answer},expl=#{expl}
+		 where
+		tid=#{tid}
+	</select>
+
+	<select id="del" parameterType="Integer">
+		delete from testInfo where
+		tid=#{tid}
+	</select> 
+
+   <select id="countAllScore" resultType="Integer">
+		select  sum(score) from testInfo
+	</select> 
+	 <select id="Easynum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where factor=#{string}
+	</select> 
+	 <select id="easyscore"  parameterType="String" resultType="Double">
+		select sum(score) from testInfo where factor=#{string}
+	</select> 
+	 <select id="mediumnum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where factor=#{string}
+	</select> 
+	 <select id="mediumscore"  parameterType="String" resultType="Double">
+		select sum(score) from testInfo where factor=#{string}
+	</select> 
+	 <select id="hardnum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where factor=#{string}
+	</select> 
+	 <select id="hardscore"  parameterType="String" resultType="Double">
+	    select sum(score) from testInfo where factor=#{string}
+	</select> 
+	
+	 <select id="selectnum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where type=#{string}
+	</select> 
+    <select id="selectsocre"  parameterType="String" resultType="Double">
+	    select sum(score) from testInfo where type=#{string}
+	</select> 
+
+	<select id="tknum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where type=#{string}
+	</select> 
+    <select id="tkscore"  parameterType="String" resultType="Double">
+	    select sum(score) from testInfo where type=#{string}
+	</select>
+	
+	<select id="pdnum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where type=#{string}
+	</select> 
+    <select id="pdsocre"  parameterType="String" resultType="Double">
+	    select sum(score) from testInfo where type=#{string}
+	</select>
+	
+	<select id="jdnum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where type=#{string}
+	</select> 
+    <select id="jdsocre"  parameterType="String" resultType="Double">
+	    select sum(score) from testInfo where type=#{string}
+	</select>
+	
+	<select id="bcnum"  parameterType="String" resultType="Integer">
+		select count(*) from testInfo where type=#{string}
+	</select> 
+    <select id="bcsocre"  parameterType="String" resultType="Double">
+	    select sum(score) from testInfo where type=#{string}
+	</select> -->
+
+</mapper>

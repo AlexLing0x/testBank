@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.mapper.SectionMapper">
+
+	<resultMap id="result-section-map" type="Section">
+		<id property="sid" column="sid" />
+		<result property="sectionNo" column="sectionNo" />
+		<result property="sectionName" column="sectionName" />
+		<association property="chapter" column="cid" javaType="Chapter">
+			<result property="cid" column="cid" />
+			<result property="chapterNo" column="chapterNo" />
+			<result property="chapterName" column="chapterName" />
+		</association>
+	</resultMap>
+
+	<select id="selList" parameterType="Map" resultMap="result-section-map">
+		select s.sid,s.cid,s.sectionNo,s.sectionName,c.chapterNo,c.chapterName
+		from section s inner join chapter c on s.cid=c.cid
+		<where>
+			<if test="chapterNo!=null and chapterNo!=''"> c.chapterNo=#{chapterNo}</if>
+			<if test="sectionName!=null and sectionName!=''">and s.sectionName like CONCAT('%',#{sectionName},'%')
+			</if>
+		</where>
+	</select>
+
+	<select id="selCount" parameterType="Section" resultType="Integer">
+		select count(*) num from section s inner join chapter c on s.cid=c.cid
+		<where>
+			<if test="chapterNo!=null and chapterNo!=''"> c.chapterNo=#{chapterNo}</if>
+			<if test="sectionName!=null and sectionName!=''">and s.sectionName like CONCAT('%',#{sectionName},'%')
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="add" parameterType="Section" >
+		insert into section (cid,sectionNo,sectionName)
+		values(#{cid},#{sectionNo},#{sectionName})
+	</select>
+	
+	<select id="selOne" parameterType="Integer" resultMap="result-section-map">
+		select sid,cid,sectionNo,sectionName from section  where sid=#{sid}
+		
+	</select>
+	
+	
+	<select id="update" parameterType="Section" >
+	update  section set cid=#{cid},sectionNo=#{sectionNo},sectionName=#{sectionName} where sid=#{sid}
+		
+	</select>
+	<select id="del" parameterType="Integer" >
+	delete from section where sid=#{sid}
+		
+	</select>
+	
+	
+	
+	<select id="selSection" parameterType="String" resultType="Section">
+		select sectionNo,sectionName from section s
+        INNER JOIN chapter c on c.cId=s.cId
+         WHERE chapterNo=#{chapterNo}
+		
+	</select>
+	
+	<select id="getsid" parameterType="String" resultType="Integer">
+		select sId from section s 
+         INNER JOIN chapter c ON s.cId=c.cId
+          where c.chapterNo=#{0}  and s.sectionNo=#{1}
+	</select>
+	
+	<select id="getOne" parameterType="String" resultType="Integer">
+		select count(*) from section s 
+         INNER JOIN chapter c ON s.cId=c.cId
+          where c.chapterNo=#{0}  and s.sectionNo=#{1}
+	</select>
+
+<select id="getOneforUpdate" parameterType="String" resultType="Integer">
+		select count(*) from section s 
+         INNER JOIN chapter c ON s.cId=c.cId
+          where c.chapterNo=#{0}  and s.sectionNo=#{1} and  s.sectionNo!=#{2}
+	</select>
+	
+	<select id="getChapter" parameterType="Integer" resultType="Integer">
+		select count(*) from section s 
+         INNER JOIN chapter c ON s.cId=c.cId
+          where c.cid=#{cid} 
+	</select>
+</mapper>

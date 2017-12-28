@@ -1,0 +1,45 @@
+2017-05-21 13:42:50  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-21 13:44:41  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-21 13:44:56  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-21 15:25:19  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-21 15:25:19  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Compiling FreeMarker template ≤‚ ‘.ftl[zh_CN,UTF-8,parsed]  from file:/F:/Workspaces/MyEclipse%2010/testBank/WebRoot/WEB-INF/classes/com/util/%e6%b5%8b%e8%af%95.ftl
+2017-05-21 15:36:28  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-21 15:36:28  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Compiling FreeMarker template ≤‚ ‘.ftl[zh_CN,UTF-8,parsed]  from file:/F:/Workspaces/MyEclipse%2010/testBank/WebRoot/WEB-INF/classes/com/util/%e6%b5%8b%e8%af%95.ftl
+2017-05-21 23:33:36  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-21 23:33:36  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Compiling FreeMarker template ≤‚ ‘.ftl[zh_CN,UTF-8,parsed]  from file:/F:/Workspaces/MyEclipse%2010/testBank/WebRoot/WEB-INF/classes/com/util/%e6%b5%8b%e8%af%95.ftl
+2017-05-21 23:33:36  freemarker.log.Log4JLoggerFactory$Log4JLogger.error(Log4JLoggerFactory.java:96)  
+
+Expression l.title is undefined on line 36, column 64 in ≤‚ ‘.ftl.
+The problematic instruction:
+----------
+==> ${l.title} [on line 36, column 62 in ≤‚ ‘.ftl]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression l.title is undefined on line 36, column 64 in ≤‚ ‘.ftl.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:124)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:209)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:209)
+	at freemarker.core.IteratorBlock$Context.runLoop(IteratorBlock.java:179)
+	at freemarker.core.Environment.visit(Environment.java:416)
+	at freemarker.core.IteratorBlock.accept(IteratorBlock.java:102)
+	at freemarker.core.Environment.visit(Environment.java:209)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:209)
+	at freemarker.core.Environment.process(Environment.java:189)
+	at freemarker.template.Template.process(Template.java:237)
+	at com.util.WordTest.createWord(WordTest.java:53)
+	at com.util.WordTest.main(WordTest.java:30)
+2017-05-22 00:00:13  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-22 00:00:13  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Compiling FreeMarker template ≤‚ ‘.ftl[zh_CN,UTF-8,parsed]  from file:/F:/Workspaces/MyEclipse%2010/testBank/WebRoot/WEB-INF/classes/com/util/%e6%b5%8b%e8%af%95.ftl
+2017-05-22 00:03:05  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-22 00:03:05  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Compiling FreeMarker template ≤‚ ‘.ftl[zh_CN,UTF-8,parsed]  from file:/F:/Workspaces/MyEclipse%2010/testBank/WebRoot/WEB-INF/classes/com/util/%e6%b5%8b%e8%af%95.ftl
+2017-05-22 09:54:02  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘1.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-22 09:54:02  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Compiling FreeMarker template ≤‚ ‘1.ftl[zh_CN,UTF-8,parsed]  from file:/F:/Workspaces/MyEclipse%2010/testBank/WebRoot/WEB-INF/classes/com/util/%e6%b5%8b%e8%af%951.ftl
+2017-05-22 10:25:56  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Could not find template in cache, creating new one; id=[≤‚ ‘.ftl[zh_CN,UTF-8,parsed] ]
+2017-05-22 10:25:56  freemarker.log.Log4JLoggerFactory$Log4JLogger.debug(Log4JLoggerFactory.java:81)  Compiling FreeMarker template ≤‚ ‘.ftl[zh_CN,UTF-8,parsed]  from file:/F:/Workspaces/MyEclipse%2010/testBank/WebRoot/WEB-INF/classes/com/util/%e6%b5%8b%e8%af%95.ftl

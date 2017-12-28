@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+
+    
+<mapper namespace="com.mapper.PrintMapper">  
+	<resultMap id="result-print-map" type="Print">
+	  <id property="pid" column="pid" />
+		<result property="pTime" column="pTime" />
+		<result property="remark" column="remark" />
+		
+	<association property="paper" column="tpid" javaType="Paper">
+		<result property="tpNo" column="tpNo" />
+		<result property="tpName" column="tpName" />
+		<result property="content" column="content" />
+		<result property="generateDate" column="generateDate" />
+		<result property="description" column="description" />
+	</association>
+    	</resultMap>
+     
+     <select id="getList"  resultMap="result-print-map">
+    	 select p.*,tp.* from print p
+    	 inner join testpaper tp on p.tpid=tp.tpid
+     </select>
+     
+      <select id="addOne" parameterType="Print">
+     	insert into print (tpid,pTime)
+     	values(#{tpid},NOW())
+     </select>
+     <!--
+      <select id="update" parameterType="Chapter">
+     	update chapter set chapterNo=#{chapterNo},chapterName=#{chapterName}
+     	where cId=#{cid} 
+     </select>
+     
+      <select id="del" parameterType="Integer">
+     	delete from chapter where cId=#{cid}
+     </select>
+     
+      <select id="selOne" parameterType="Integer" resultType="Chapter">
+      select cId,chapterNo,chapterName from chapter where cId=#{cid}
+     </select> 
+          获取cid
+       <select id="getcid" parameterType="String" resultType="Integer">
+        select cId from chapter where chapterNo=#{chapterNo}
+     </select> --> 
+    
+  	  
+</mapper>

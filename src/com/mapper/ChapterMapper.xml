@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+
+    
+<mapper namespace="com.mapper.ChapterMapper">  
+
+    
+     
+     <select id="selALL" parameterType="Chapter" resultType="Chapter">
+    	 select cId,chapterNo,chapterName from chapter
+     </select>
+     
+     <select id="add" parameterType="Chapter">
+     	insert into chapter(chapterNo,chapterName)
+     	values(#{chapterNo},#{chapterName})
+     </select>
+     
+      <select id="update" parameterType="Chapter">
+     	update chapter set chapterNo=#{chapterNo},chapterName=#{chapterName}
+     	where cId=#{cid} 
+     </select>
+     
+      <select id="del" parameterType="Integer">
+     	delete from chapter where cId=#{cid}
+     </select>
+     
+      <select id="selOne" parameterType="Integer" resultType="Chapter">
+      select cId,chapterNo,chapterName from chapter where cId=#{cid}
+     </select> 
+        <!--   获取cid -->
+       <select id="getcid" parameterType="String" resultType="Integer">
+        select cId from chapter where chapterNo=#{chapterNo}
+     </select> 
+     
+     <select id="getOne" parameterType="String" resultType="Integer">
+        select count(*) from chapter where chapterNo=#{chapterNo}
+     </select> 
+     
+    
+  	  
+</mapper>

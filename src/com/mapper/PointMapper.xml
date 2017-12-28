@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.mapper.PointMapper">
+
+	<resultMap id="result-point-map" type="Point">
+		<id property="kpid" column="kpid" />
+		<result property="pointNo" column="pointNo" />
+		<result property="pointName" column="pointName" />
+		<association property="section" column="sid" javaType="Section">
+			<result property="sid" column="sid" />
+			<result property="sectionNo" column="sectionNo" />
+			<result property="sectionName" column="sectionName" />
+		</association>
+		<association property="chapter" column="cid" javaType="Chapter">
+			<result property="cid" column="cid" />
+			<result property="chapterNo" column="chapterNo" />
+			<result property="chapterName" column="chapterName" />
+		</association>
+	</resultMap>
+
+	<select id="selList" parameterType="Map" resultMap="result-point-map">
+		select p.kpid,p.sid,p.pointNo,p.pointName,s.sectionNo,s.sectionName,s.cId,c.chapterNo,c.chapterName
+		from point p 
+		inner join section s on p.sid=s.sid
+		inner join chapter c on c.cid=s.cid
+		<where>
+			<if test="chapterNo!=null and chapterNo!=''">and c.chapterNo=#{chapterNo}</if>
+			<if test="sectionNo!=null and sectionNo!=''">and s.sectionNo=#{sectionNo}</if>
+			<if test="pointName!=null and pointName!=''">and p.pointName like CONCAT('%',#{pointName},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selAll" parameterType="Point" resultType="Point">
+		select kpid,sid,pointNo,pointName
+		from point 
+	</select>
+
+	<select id="selCount" parameterType="Point" resultType="Integer">
+		select count(*) num from point p 
+		inner join section s on p.sid=s.sid
+		inner join chapter c on c.cid=s.cid
+		<where>
+			<if test="chapterNo!=null and chapterNo!=''">and c.chapterNo=#{chapterNo}</if>
+			<if test="sectionNo!=null and sectionNo!=''">and s.sectionNo=#{sectionNo}</if>
+			<if test="pointName!=null and pointName!=''">and p.pointName like CONCAT('%',#{pointName},'%')
+			</if>
+		</where>
+	</select>
+	
+	
+ 	<select id="add" parameterType="Point" >
+		insert into point (sid,pointNo,pointName)
+		values(#{sid},#{pointNo},#{pointName})
+	</select>
+
+	<select id="selOne" parameterType="Integer" resultMap="result-point-map">
+		select kpid,pointNo,pointName from point  where kpid=#{kpid}
+		
+	</select>
+	
+
+	<select id="update" parameterType="Point" >
+	update  point set sid=#{sid},pointNo=#{pointNo},pointName=#{pointName} where kpid=#{kpid}
+		
+	</select>
+		
+	<select id="del" parameterType="Integer" >
+	delete from point where kpid=#{kpid}
+		
+	</select> 
+	
+	<select id="getPoints" parameterType="String" resultType="Point">
+		select kpid,p.sid,pointNo,pointName
+		from point p
+		inner join section s on s.sid=p.sId
+		inner join chapter c on s.cId=c.cId
+		 where s.sectionNo=#{sectionNo} and c.chapterNo=#{chapterNo}
+
+	</select>
+
+
+</mapper>
