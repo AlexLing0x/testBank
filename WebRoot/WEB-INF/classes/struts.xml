@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+
+	<package name="root" extends="struts-default">
+
+		<interceptors>
+
+			<!-- 自定义拦截器 -->
+			<interceptor name="LoginInterceptor" class="com.action.LoginInterceptor" />
+
+
+			<!-- 定义拦截器栈 -->
+			<interceptor-stack name="appStack">
+				<!-- 引用自定义拦截器 myInterceptor -->
+				<interceptor-ref name="LoginInterceptor" />
+				<!--文件上传拦截器 -->
+				<interceptor-ref name="fileUpload" />
+				<!-- 系统拦截器:将请求中的参数设置到Action中去 -->
+				<interceptor-ref name="params" />
+
+			</interceptor-stack>
+
+
+		</interceptors>
+
+		<!-- 系统所用的拦截器栈名 -->
+		<default-interceptor-ref name="appStack" />
+
+		<!-- 全局的result返回参数(所有Action和Interceptor都可以使用) -->
+		<global-results>
+			<result name="error">error.jsp</result>
+			<result name="login">/login.jsp</result>
+		</global-results>
+
+		<action name="LoginAction!*" method="{1}" class="loginAction">
+			<result name="main">/main.jsp</result>
+			<result name="login">/login.jsp</result>
+			
+		</action>
+		
+		<action name="UserInfoAction!*" method="{1}" class="userInfoAction">
+			<result name="list">/userAdmin.jsp</result>
+			<result name="update">/userUpdate.jsp</result>
+			<result name="modifypw">/modifyPW.jsp</result>
+			<result name="main">/main.jsp</result>
+			<result name="add">/userAdd.jsp</result>
+			<result name="welcom">/welcome.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="ChapterAction!*" method="{1}" class="chapterAction">
+			<result name="list">/chapterAdmin.jsp</result>
+			<result name="update">/chapterUpdate.jsp</result>
+			<result name="add">/chapterAdd.jsp</result>
+		</action>
+		
+		<action name="sectionAction!*" method="{1}" class="sectionAction">
+			<result name="list">/sectionAdmin.jsp</result>
+			<result name="add">/sectionAdd.jsp</result>
+			<result name="update">/sectionUpdate.jsp</result>
+		</action>
+		
+		<action name="pointAction!*" method="{1}" class="pointAction">
+			<result name="list">/pointAdmin.jsp</result>
+			<result name="add">/pointAdd.jsp</result>
+			<result name="update">/pointUpdate.jsp</result>
+		</action>
+	<action name="testAction!*" method="{1}" class="testAction">
+			<result name="list">/testAdmin.jsp</result>
+			<result name="add">/testAdd.jsp</result>
+			<result name="update">/testUpdate.jsp</result>
+			<result name="count">/testCount.jsp</result>
+		</action>
+
+    <action name="paperAction!*" method="{1}" class="paperAction">
+			<result name="list">/paperAdmin.jsp</result>
+			<result name="autoGene">/paperAutoGene.jsp</result>
+			<result name="previewPrint">/paperPreview.jsp</result>
+			<result name="count">/testCount.jsp</result>
+		</action>
+		
+		<action name="printAction!*" method="{1}" class="printAction">
+			<result name="list">/paperPrint.jsp</result>
+			
+		</action>
+
+	</package>
+	
+	<package name="word" namespace="/" extends="struts-default">
+  <action name="createWord" class="com.action.PaperAction" method="createWord">
+   <result name="createWordSuccess" type="redirectAction">
+    <param name="actionName">dowloadWord</param>  
+    <param name="filePath">${filePath}</param>
+    <param name="fileOnlyName">${fileOnlyName}</param>
+    <param name="fileName">${fileName}</param>
+    <param name="encode">true</param>
+   </result>
+  </action>
+  <action name="dowloadWord" class="com.action.PaperAction" method="dowloadWord">
+   <result name="dowloadWord" type="stream">
+    <param name="contentDisposition">attachment;filename="${fileName}"</param>
+    <param name="inputName">wordFile</param>
+    <param name="encode">true</param>
+   </result>
+   <result name="error">/error.jsp</result>
+  </action>
+ </package>
+
+
+</struts>
